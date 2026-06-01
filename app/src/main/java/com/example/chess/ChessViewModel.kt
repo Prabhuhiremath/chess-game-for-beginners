@@ -16,7 +16,13 @@ data class GameState(
     val moveHistory: List<Move> = emptyList(),
     val isGameOver: Boolean = false,
     val winner: PieceColor? = null,
-    val isThinking: Boolean = false
+    val isThinking: Boolean = false,
+    val isCheck: Boolean = false,
+    // Pieces that White has captured (i.e. Black pieces taken off the board)
+    val capturedByWhite: List<PieceType> = emptyList(),
+    // Pieces that Black has captured (i.e. White pieces taken off the board)
+    val capturedByBlack: List<PieceType> = emptyList(),
+    val vsComputer: Boolean = false
 )
 
 class ChessViewModel : ViewModel() {
@@ -38,6 +44,7 @@ class ChessViewModel : ViewModel() {
     fun startGame(mode: GameMode) {
         this.gameMode = mode
         engine.restart()
+        _uiState.value = GameState()
         updateState()
     }
 
@@ -108,21 +115,38 @@ class ChessViewModel : ViewModel() {
             // Undo twice to undo AI move as well
             engine.undoMove()
         }
+        // Coming back from a finished game returns us to play.
+        _uiState.value = _uiState.value.copy(isGameOver = false, winner = null)
         updateState()
     }
     
     fun restart() {
         engine.restart()
+        _uiState.value = GameState()
         updateState()
     }
 
     private fun updateState() {
+        val history = engine.moveHistory.toList()
+        // Black pieces captured by White
+        val capturedByWhite = history
+            .filter { it.pieceMoved.color == PieceColor.White && it.pieceCaptured != null }
+            .map { it.pieceCaptured!!.type }
+        // White pieces captured by Black
+        val capturedByBlack = history
+            .filter { it.pieceMoved.color == PieceColor.Black && it.pieceCaptured != null }
+            .map { it.pieceCaptured!!.type }
+
         _uiState.value = _uiState.value.copy(
             board = engine.board.copy(),
             currentTurn = engine.currentTurn,
             selectedPos = null,
             legalMovesForSelected = emptyList(),
-            moveHistory = engine.moveHistory.toList()
+            moveHistory = history,
+            isCheck = engine.isInCheck(),
+            capturedByWhite = capturedByWhite,
+            capturedByBlack = capturedByBlack,
+            vsComputer = gameMode != GameMode.PlayerVsPlayer
         )
     }
 
