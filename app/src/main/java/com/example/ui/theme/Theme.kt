@@ -1,27 +1,30 @@
 package com.example.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
-private val CustomWoodScheme = darkColorScheme(
-    primary = MDarkPrimary,
-    background = MDarkBackground,
-    surface = MDarkSurface,
-    onPrimary = androidx.compose.ui.graphics.Color.White,
-    onBackground = androidx.compose.ui.graphics.Color.White,
-    onSurface = androidx.compose.ui.graphics.Color.White
+private val KidsColorScheme = lightColorScheme(
+    primary = MPrimary,
+    onPrimary = Color.White,
+    secondary = Bubblegum,
+    onSecondary = Color.White,
+    tertiary = Sunny,
+    background = MBackground,
+    onBackground = DarkText,
+    surface = MSurface,
+    onSurface = DarkText
 )
 
 @Composable
 fun MyApplicationTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // Disable dynamic colors for wooden theme
+    darkTheme: Boolean = false,
+    dynamicColor: Boolean = false, // Keep our custom playful palette
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colorScheme = CustomWoodScheme,
+        colorScheme = KidsColorScheme,
         typography = Typography,
         content = content
     )

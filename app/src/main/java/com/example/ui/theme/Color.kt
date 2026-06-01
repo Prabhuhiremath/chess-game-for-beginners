@@ -2,17 +2,36 @@ package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val BoardLight = Color(0xFFF0D9B5)
-val BoardDark = Color(0xFFB58863)
-val Highlight = Color(0x66CDDA61) // Soft green highlight
-val LastMoveHighlight = Color(0x66F6E05E) // Soft yellow
-val WoodBackground = Color(0xFF2C1E16)
-val WoodCard = Color(0xFF452B1F)
+// --- Kid-friendly bright palette ---
 
-val PrimaryWoodLight = Color(0xFFD6A07B)
-val PrimaryWoodDark = Color(0xFFA56646)
+// Playful background gradient colors
+val SkyTop = Color(0xFF7AC7FF)      // bright sky blue
+val SkyBottom = Color(0xFFB388FF)   // soft purple
+val CloudCard = Color(0xFFFFFFFF)   // white cards
 
-// Base M3 colors
-val MDarkPrimary = Color(0xFFD6A07B)
-val MDarkBackground = Color(0xFF20130D)
-val MDarkSurface = Color(0xFF382319)
+// Board squares (soft, candy-like)
+val BoardLight = Color(0xFFFFF3D6)  // cream
+val BoardDark = Color(0xFF7FC6A4)   // mint green
+
+// Highlights
+val Highlight = Color(0x804FC3F7)        // friendly blue selection
+val LastMoveHighlight = Color(0x80FFE082) // sunny yellow
+val MoveDotColor = Color(0xCC4CAF50)      // green dots for legal moves
+val CaptureRing = Color(0xCCFF7043)       // orange ring for captures
+val CheckHighlight = Color(0x99FF5252)    // red when king in check
+
+// Brand / accents
+val Sunny = Color(0xFFFFC107)
+val Bubblegum = Color(0xFFFF6F91)
+val Grape = Color(0xFF9C5CFF)
+val Leaf = Color(0xFF4CAF50)
+val Tangerine = Color(0xFFFF8A3D)
+
+// Text
+val DarkText = Color(0xFF3A2E5C)
+val LightText = Color(0xFFFFFFFF)
+
+// Base M3 colors (light, cheerful scheme)
+val MPrimary = Color(0xFF9C5CFF)
+val MBackground = Color(0xFFEFE9FF)
+val MSurface = Color(0xFFFFFFFF)
